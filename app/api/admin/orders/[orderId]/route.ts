@@ -4,11 +4,14 @@ import { updateOrderStatus } from "@/lib/db/orders"
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { orderId: string } }
+  // 1. Change params to a Promise type
+  { params }: { params: Promise<{ orderId: string }> }
 ) {
   try {
     const { status } = await request.json()
-    const orderId = params.orderId
+    
+    // 2. Await the params before accessing orderId
+    const { orderId } = await params
 
     await updateOrderStatus(orderId, status)
 
