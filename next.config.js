@@ -28,4 +28,8 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = {
+  experimental: {
+    proxy: true, // Use this instead of middleware
+  }
+}
